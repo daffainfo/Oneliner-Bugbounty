@@ -108,6 +108,18 @@ curl -Lks https://example.com | tac | sed "s#\\\/#\/#g" | egrep -o "src['\"]?\s*
 curl -Lks https://example.com | tac | sed "s#\\\/#\/#g" | egrep -o "src['\"]?\s*[=:]\s*['\"]?[^'\"]+.js[^'\"> ]*" | sed -r "s/^src['\"]?[=:]['\"]//g" | awk -v url=https://example.com '{if(length($1)) if($1 ~/^http/) print $1; else if($1 ~/^\/\//) print "https:"$1; else print url"/"$1}' | sort -fu | xargs -I '%' sh -c "echo \"'##### %\";curl -k -s \"%\" | sed \"s/[;}\)>]/\n/g\" | grep -Po \"('#####.*)|(['\\\"](https?:)?[/]{1,2}[^'\\\"> ]{5,})|(\.(get|post|ajax|load)\s*\(\s*['\\\"](https?:)?[/]{1,2}[^'\\\"> ]{5,})\" | sort -fu" | tr -d "'\""
 ```
 
+### Find Access Keys for IAM
+
+```bash
+echo example.com | subfinder -silent -all | httpx -silent -path ".env",".mysql_history","echo $(echo $(</dev/stdin) | cut -d "." -f2).sql" -mc 200 -ports 80,443,8080,8443 | grep -E -i "AKIA[A-Z0-9]{16}"
+```
+
+### Subdomain enumeration with Spyse API
+
+```bash
+curl -XGET "https://api.sypse.com/v3/data/domain/subdomain?limit=100&offset=100&domain=example.com" -H "Accept: application/json" -H "Authorization: Bearer TOKEN_HERE" 2>/dev/null | jq '.data.items | .[] | .name' | sed -e 's/^"//' -e 's/"$//' | grep example.com
+```
+
 ## References
 - [ReconOne](https://twitter.com/ReconOne_)
 - [jdksec](https://twitter.com/jdksec/status/1236891532256575488)
@@ -115,3 +127,5 @@ curl -Lks https://example.com | tac | sed "s#\\\/#\/#g" | egrep -o "src['\"]?\s*
 - [ofjaaah](https://twitter.com/ofjaaah/status/1532581839344394241)
 - [pikpikcu](https://twitter.com/sec715/status/1295216521501908992)
 - [gwen001](https://gist.github.com/gwen001/0b15714d964d99c740a7e8998bd483df)
+- [sazekodzeb](https://twitter.com/sazekodzeb/status/1535967868390711302)
+- [TheDarkSideOps](https://twitter.com/TheDarkSideOps/status/1310744404605501441)
