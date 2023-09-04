@@ -132,6 +132,11 @@ echo example.com | subfinder -silent -all | httpx -silent -path ".env",".mysql_h
 curl -XGET "https://api.sypse.com/v3/data/domain/subdomain?limit=100&offset=100&domain=example.com" -H "Accept: application/json" -H "Authorization: Bearer TOKEN_HERE" 2>/dev/null | jq '.data.items | .[] | .name' | sed -e 's/^"//' -e 's/"$//' | grep example.com
 ```
 
+### Discover Subdomains with permutations
+```bash
+subfinder -d target.com -r -all | alterx | dnsx
+```
+
 ## References
 - [ReconOne](https://twitter.com/ReconOne_)
 - [jdksec](https://twitter.com/jdksec/status/1236891532256575488)
