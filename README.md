@@ -132,6 +132,15 @@ echo example.com | subfinder -silent -all | httpx -silent -path ".env",".mysql_h
 curl -XGET "https://api.sypse.com/v3/data/domain/subdomain?limit=100&offset=100&domain=example.com" -H "Accept: application/json" -H "Authorization: Bearer TOKEN_HERE" 2>/dev/null | jq '.data.items | .[] | .name' | sed -e 's/^"//' -e 's/"$//' | grep example.com
 ```
 
+### Find some interested like apikey, password, etc
+```bash
+grep -RiE "pass|key|api|secret" *
+```
+### Find API, url in js file
+```bash
+grep -o -E "(https?://)?/?[{}a-z0-9A-Z_\.-]{2,}/[{}/a-z0-9A-Z_\.-]+"
+```
+
 ## References
 - [ReconOne](https://twitter.com/ReconOne_)
 - [jdksec](https://twitter.com/jdksec/status/1236891532256575488)
